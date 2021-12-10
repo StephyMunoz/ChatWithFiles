@@ -1,5 +1,8 @@
 ## Prueba 1: Chat con subida de archivos
 #### Stephanie Muñoz, Mateo Borja, Stiven López
+#### Link de Youtube: https://www.youtube.com/watch?v=sN4DZB5ccbQ
+#### Video posteado en Twitter: https://twitter.com/MateoNBR/status/1469420720992231426
+
 
 Esta es una aplicación realizada con Ionic y utilizando FireStore de FireBase. En las siguientes figuras se muestra la estructura del proyecto, el cual consta de varias páginas y servicios
 
