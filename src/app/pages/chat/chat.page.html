@@ -54,7 +54,16 @@
       File size: {{ snap.totalBytes | formatFileSize }} 
       
       Data transfered: {{ snap.bytesTransferred | formatFileSize }}
-    </div>    
+    </div>   
+    
+    <ion-item>
+      <ion-label position="floating">Link del archivo: </ion-label>
+      <ion-input type="text" id="name" value="{{fileUrl}}">
+        <a href="{{fileUrl}}" target="blank">{{fileUrl}}</a>
+      </ion-input>
+    </ion-item>
+
+    <!-- <div>{{this.uploadImage}}</div> -->
     <ion-row class="ion-align-items-center">
       <ion-col size="10">
         <ion-textarea autoGrow="true" class="message-input" rows="1" maxLength="500" [(ngModel)]="newMsg" >
@@ -69,6 +78,7 @@
           <ion-col size="12" class="ion-align-items-center">
             <ion-button  fill="clear" color="primary" [disabled]="newMsg === ''"
               class="msg-btn" (click)="sendMessage()">
+              
               <ion-icon name="send" slot="icon-only"></ion-icon>
             </ion-button>
           </ion-col>

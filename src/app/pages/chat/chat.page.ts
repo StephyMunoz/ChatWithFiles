@@ -24,12 +24,15 @@ export class ChatPage implements OnInit {
  
   messages: Observable<Message[]>;
   newMsg = '';
+
+  public fileUrl : String = '';
   
   constructor
   (
     private chatService: ChatService, 
     private router: Router, private afs: AngularFirestore,
-    private afStorage: AngularFireStorage
+    private afStorage: AngularFireStorage,
+    
     ) { 
     this.isFileUploading = false;
     this.isFileUploaded = false;
@@ -38,9 +41,11 @@ export class ChatPage implements OnInit {
     this.filesCollection = afs.collection<imgFile>('imagesCollection');
     this.files = this.filesCollection.valueChanges();
     }
+    
 
   private filesCollection: AngularFirestoreCollection<imgFile>;
-
+  
+  
   // File upload task 
   fileUploadTask: AngularFireUploadTask;
 
@@ -88,10 +93,10 @@ export class ChatPage implements OnInit {
     const file = event.item(0)
 
     // Image validation
-    if (file.type.split('/')[0] !== 'image') { 
-      console.log('File type is not supported!')
-      return;
-    }
+    // if (file.type.split('/')[0] !== 'image') { 
+    //   console.log('File type is not supported!')
+    //   return;
+    // }
 
     this.isFileUploading = true;
     this.isFileUploaded = false;
@@ -121,6 +126,8 @@ export class ChatPage implements OnInit {
             filepath: resp,
             size: this.imgSize
           });
+          
+
           this.isFileUploading = false;
           this.isFileUploaded = true;
         },error=>{
@@ -131,17 +138,22 @@ export class ChatPage implements OnInit {
           this.imgSize = snap.totalBytes;
       })
     )
+    console.log('1', this.UploadedImageURL);
+    
 }
-
 
 storeFilesFirebase(image: imgFile) {
     const fileId = this.afs.createId();
     
     this.filesCollection.doc(fileId).set(image).then(res => {
-      console.log(res);
+      // console.log(res);
+      // console.log('file', image.filepath);
+      
+      this.fileUrl = image.filepath;
     }).catch(err => {
       console.log(err);
     });
+    console.log('fk', this.fileUrl)
 }
-  
+
 }
